@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useRef } from "react";
 
 const HOW_MET_OPTIONS = [
   "a dating app",
@@ -78,73 +78,71 @@ export default function Home() {
   const [name, setName] = useState("");
   const [numDates, setNumDates] = useState(2);
   const [howMet, setHowMet] = useState(HOW_MET_OPTIONS[0]);
-  const [sincerity, setSincerity] = useState(5);
+  const [sincerity, setSincerity] = useState(3);
   const [doorOpen, setDoorOpen] = useState(4);
   const [length, setLength] = useState(5);
   const [excuseOption, setExcuseOption] = useState("");
   const [customExcuse, setCustomExcuse] = useState("");
   const [grammarLevel, setGrammarLevel] = useState(5);
   const [intimacy, setIntimacy] = useState(1);
+  const [theirVibe, setTheirVibe] = useState("");
+  const [timeSinceContact, setTimeSinceContact] = useState("");
+  const [theirMessage, setTheirMessage] = useState("");
+  const [showTheirMessage, setShowTheirMessage] = useState(false);
   const [output, setOutput] = useState("");
   const [loading, setLoading] = useState(false);
   const [copied, setCopied] = useState(false);
   const [error, setError] = useState("");
 
-  const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const abortRef = useRef<AbortController | null>(null);
 
   const excuseTheme = excuseOption === "custom" ? customExcuse : excuseOption;
 
-  useEffect(() => {
-    if (debounceRef.current) clearTimeout(debounceRef.current);
+  async function generate() {
+    if (abortRef.current) abortRef.current.abort();
+    abortRef.current = new AbortController();
 
-    debounceRef.current = setTimeout(async () => {
-      if (abortRef.current) abortRef.current.abort();
-      abortRef.current = new AbortController();
+    setLoading(true);
+    setError("");
+    setCopied(false);
 
-      setLoading(true);
-      setError("");
-      setCopied(false);
+    try {
+      const res = await fetch("/api/generate", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name,
+          numDates,
+          howMet,
+          sincerity,
+          doorOpen,
+          length,
+          excuseTheme,
+          grammarLevel,
+          intimacy,
+          theirVibe,
+          timeSinceContact,
+          theirMessage,
+        }),
+        signal: abortRef.current.signal,
+      });
 
-      try {
-        const res = await fetch("/api/generate", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            name,
-            numDates,
-            howMet,
-            sincerity,
-            doorOpen,
-            length,
-            excuseTheme,
-            grammarLevel,
-            intimacy,
-          }),
-          signal: abortRef.current.signal,
-        });
+      const data = await res.json();
 
-        const data = await res.json();
-
-        if (!res.ok) {
-          setError("Something went wrong. Try again.");
-          return;
-        }
-
-        setOutput(data.text);
-      } catch (err: unknown) {
-        if (err instanceof Error && err.name !== "AbortError") {
-          setError("Network error. Try again.");
-        }
-      } finally {
-        setLoading(false);
+      if (!res.ok) {
+        setError("Something went wrong. Try again.");
+        return;
       }
-    }, 750);
 
-    return () => {
-      if (debounceRef.current) clearTimeout(debounceRef.current);
-    };
-  }, [name, numDates, howMet, sincerity, doorOpen, length, excuseOption, customExcuse, grammarLevel, intimacy]);
+      setOutput(data.text);
+    } catch (err: unknown) {
+      if (err instanceof Error && err.name !== "AbortError") {
+        setError("Network error. Try again.");
+      }
+    } finally {
+      setLoading(false);
+    }
+  }
 
   async function copyToClipboard() {
     await navigator.clipboard.writeText(output);
@@ -232,6 +230,46 @@ export default function Home() {
             </select>
           </div>
 
+          {/* Their vibe */}
+          <div className="mb-6">
+            <label className="block font-bold text-gray-700 mb-1">
+              What&apos;s their vibe?{" "}
+              <span className="font-normal text-gray-400 text-sm">(optional)</span>
+            </label>
+            <select
+              value={theirVibe}
+              onChange={(e) => setTheirVibe(e.target.value)}
+              className="w-full border-2 border-gray-200 rounded-xl p-3 text-gray-700 focus:outline-none focus:border-pink-400"
+            >
+              <option value="">Not sure / doesn&apos;t matter</option>
+              <option value="really-into-me">Really into me</option>
+              <option value="intense">A bit intense / moving fast</option>
+              <option value="casual">Pretty casual about it</option>
+              <option value="sweet-no-spark">Super sweet, just no spark</option>
+              <option value="hard-to-read">Hard to read</option>
+            </select>
+          </div>
+
+          {/* Time since last contact */}
+          <div className="mb-6">
+            <label className="block font-bold text-gray-700 mb-1">
+              When did you last talk?{" "}
+              <span className="font-normal text-gray-400 text-sm">(optional)</span>
+            </label>
+            <select
+              value={timeSinceContact}
+              onChange={(e) => setTimeSinceContact(e.target.value)}
+              className="w-full border-2 border-gray-200 rounded-xl p-3 text-gray-700 focus:outline-none focus:border-pink-400"
+            >
+              <option value="">Not sure</option>
+              <option value="today">Today</option>
+              <option value="yesterday">Yesterday</option>
+              <option value="few-days">A few days ago</option>
+              <option value="week">About a week ago</option>
+              <option value="weeks">2+ weeks ago</option>
+            </select>
+          </div>
+
           {/* Intimacy */}
           <SliderInput
             label="How far did things go?"
@@ -244,11 +282,11 @@ export default function Home() {
             displayValue={INTIMACY_LABELS[intimacy - 1]}
           />
 
-          {/* Sincerity */}
+          {/* Weight */}
           <SliderInput
-            label="How sincere should this be?"
-            leftLabel="Just being polite"
-            rightLabel="Genuinely means it"
+            label="How heavy should this feel?"
+            leftLabel="casual, no big deal"
+            rightLabel="serious, heartfelt"
             value={sincerity}
             onChange={setSincerity}
           />
@@ -282,6 +320,30 @@ export default function Home() {
             displayValue={grammarLabel}
           />
 
+          {/* Their last message */}
+          <div className="mb-6">
+            <button
+              onClick={() => {
+                setShowTheirMessage(!showTheirMessage);
+                if (showTheirMessage) setTheirMessage("");
+              }}
+              className="flex items-center gap-2 font-bold text-gray-700 hover:text-pink-500 transition-colors"
+            >
+              <span className={`text-pink-400 transition-transform ${showTheirMessage ? "rotate-45" : ""}`}>+</span>
+              Responding to their message?
+            </button>
+            {showTheirMessage && (
+              <textarea
+                placeholder="Paste their last text here..."
+                value={theirMessage}
+                onChange={(e) => setTheirMessage(e.target.value)}
+                rows={3}
+                className="w-full mt-2 border-2 border-gray-200 rounded-xl p-3 text-gray-700 focus:outline-none focus:border-pink-400 resize-none"
+                autoFocus
+              />
+            )}
+          </div>
+
           {/* Excuse theme */}
           <div className="mb-2">
             <label className="block font-bold text-gray-700 mb-1">
@@ -311,6 +373,15 @@ export default function Home() {
           </div>
         </div>
 
+        {/* Generate button */}
+        <button
+          onClick={generate}
+          disabled={loading}
+          className="w-full py-4 bg-pink-500 hover:bg-pink-600 disabled:bg-pink-300 text-white font-black text-xl rounded-2xl transition-colors shadow-md mb-6"
+        >
+          {loading ? "Fizzling..." : output ? "Regenerate" : "Fizzle 'Em"}
+        </button>
+
         {/* Output */}
         <div className="bg-white rounded-3xl shadow-md p-8 min-h-32">
           {loading && (
@@ -336,7 +407,7 @@ export default function Home() {
             </>
           )}
           {!output && !loading && !error && (
-            <p className="text-gray-300 text-sm">Adjust the sliders to generate your message...</p>
+            <p className="text-gray-300 text-sm">Hit the button to generate your message...</p>
           )}
         </div>
       </div>
