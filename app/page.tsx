@@ -88,7 +88,6 @@ export default function Home() {
   const [theirVibe, setTheirVibe] = useState("");
   const [timeSinceContact, setTimeSinceContact] = useState("");
   const [theirMessage, setTheirMessage] = useState("");
-  const [showTheirMessage, setShowTheirMessage] = useState(false);
   const [output, setOutput] = useState("");
   const [loading, setLoading] = useState(false);
   const [copied, setCopied] = useState(false);
@@ -270,6 +269,22 @@ export default function Home() {
             </select>
           </div>
 
+          {/* Their last message */}
+          <div className="mb-6">
+            <label className="block font-bold text-gray-700 mb-1">
+              Got a text from them?{" "}
+              <span className="font-normal text-gray-400 text-sm">(optional)</span>
+            </label>
+            <p className="text-sm text-gray-400 mb-2">Paste their last message and we&apos;ll write a reply that lets them down naturally.</p>
+            <textarea
+              placeholder="Paste their last text here..."
+              value={theirMessage}
+              onChange={(e) => setTheirMessage(e.target.value)}
+              rows={3}
+              className="w-full border-2 border-gray-200 rounded-xl p-3 text-gray-700 focus:outline-none focus:border-pink-400 resize-none"
+            />
+          </div>
+
           {/* Intimacy */}
           <SliderInput
             label="How far did things go?"
@@ -319,30 +334,6 @@ export default function Home() {
             onChange={setGrammarLevel}
             displayValue={grammarLabel}
           />
-
-          {/* Their last message */}
-          <div className="mb-6">
-            <button
-              onClick={() => {
-                setShowTheirMessage(!showTheirMessage);
-                if (showTheirMessage) setTheirMessage("");
-              }}
-              className="flex items-center gap-2 font-bold text-gray-700 hover:text-pink-500 transition-colors"
-            >
-              <span className={`text-pink-400 transition-transform ${showTheirMessage ? "rotate-45" : ""}`}>+</span>
-              Responding to their message?
-            </button>
-            {showTheirMessage && (
-              <textarea
-                placeholder="Paste their last text here..."
-                value={theirMessage}
-                onChange={(e) => setTheirMessage(e.target.value)}
-                rows={3}
-                className="w-full mt-2 border-2 border-gray-200 rounded-xl p-3 text-gray-700 focus:outline-none focus:border-pink-400 resize-none"
-                autoFocus
-              />
-            )}
-          </div>
 
           {/* Excuse theme */}
           <div className="mb-2">
