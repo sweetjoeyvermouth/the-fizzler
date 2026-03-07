@@ -14,7 +14,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "The Fizzler",
-  description: "Let them down easy. Mostly.",
+  description: "Let them down easy.",
 };
 
 export default function RootLayout({

@@ -172,7 +172,7 @@ export default function Home() {
             The Fizzler
           </h1>
           <p className="text-gray-500 mt-2 text-lg italic">
-            Let them down easy. Mostly.
+            Let them down easy.
           </p>
         </div>
 
