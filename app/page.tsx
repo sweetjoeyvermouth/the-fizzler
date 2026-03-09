@@ -112,7 +112,7 @@ function SliderInput({
         )}
       </div>
       <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
-        <span style={{ fontSize: "13px", color: "var(--muted)", width: "90px", textAlign: "right", flexShrink: 0, fontFamily: "var(--font-vt, monospace)" }}>
+        <span style={{ fontSize: "17px", color: "var(--muted)", width: "90px", textAlign: "right", flexShrink: 0, fontFamily: "var(--font-vt, monospace)" }}>
           {leftLabel}
         </span>
         <input
@@ -123,7 +123,7 @@ function SliderInput({
           onChange={(e) => onChange(Number(e.target.value))}
           style={{ flex: 1 }}
         />
-        <span style={{ fontSize: "13px", color: "var(--muted)", width: "90px", flexShrink: 0, fontFamily: "var(--font-vt, monospace)" }}>
+        <span style={{ fontSize: "17px", color: "var(--muted)", width: "90px", flexShrink: 0, fontFamily: "var(--font-vt, monospace)" }}>
           {rightLabel}
         </span>
       </div>
@@ -240,7 +240,7 @@ export default function Home() {
           {/* Got a text from them */}
           <div style={{ marginBottom: "28px" }}>
             <PixelLabel optional>Got a text from them?</PixelLabel>
-            <p style={{ fontSize: "15px", color: "var(--muted)", marginBottom: "10px", fontFamily: "var(--font-vt, monospace)" }}>
+            <p style={{ fontSize: "18px", color: "var(--muted)", marginBottom: "10px", fontFamily: "var(--font-vt, monospace)" }}>
               Paste their last message — we&apos;ll write a reply that lets them down naturally.
             </p>
             <textarea
