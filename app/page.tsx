@@ -240,7 +240,7 @@ export default function Home() {
           {/* Got a text from them */}
           <div style={{ marginBottom: "28px" }}>
             <PixelLabel optional>Got a text from them?</PixelLabel>
-            <p style={{ fontSize: "18px", color: "var(--muted)", marginBottom: "10px", fontFamily: "var(--font-vt, monospace)" }}>
+            <p style={{ fontSize: "18px", color: "var(--muted)", marginBottom: "10px", fontFamily: "var(--font-vt, monospace)", lineHeight: "1.3" }}>
               Paste their last message — we&apos;ll write a reply that lets them down naturally.
             </p>
             <textarea
