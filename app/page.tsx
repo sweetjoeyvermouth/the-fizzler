@@ -31,6 +31,48 @@ const INTIMACY_LABELS = [
   "Home run",
 ];
 
+function FallingHearts() {
+  const [hearts, setHearts] = useState<Array<{
+    id: number; left: number; delay: number; duration: number; size: number; rot: number;
+  }>>([]);
+
+  useState(() => {
+    setHearts(
+      Array.from({ length: 11 }, (_, i) => ({
+        id: i,
+        left: 4 + Math.random() * 90,
+        delay: Math.random() * 14,
+        duration: 10 + Math.random() * 7,
+        size: 26 + Math.floor(Math.random() * 18),
+        rot: (Math.random() - 0.5) * 24,
+      }))
+    );
+  });
+
+  return (
+    <div style={{ position: "fixed", inset: 0, pointerEvents: "none", zIndex: 998, overflow: "hidden" }}>
+      {hearts.map((h) => (
+        // eslint-disable-next-line @next/next/no-img-element
+        <img
+          key={h.id}
+          src="/heart.png"
+          alt=""
+          style={{
+            position: "absolute",
+            top: "-70px",
+            left: `${h.left}%`,
+            width: `${h.size}px`,
+            height: "auto",
+            imageRendering: "pixelated",
+            animation: `heartFall ${h.duration}s ${h.delay}s linear infinite`,
+            ["--heart-rot" as string]: `${h.rot}deg`,
+          }}
+        />
+      ))}
+    </div>
+  );
+}
+
 function PixelLabel({ children, optional }: { children: React.ReactNode; optional?: boolean }) {
   return (
     <span className="pixel-label">
@@ -179,6 +221,7 @@ export default function Home() {
 
   return (
     <main style={{ minHeight: "100vh", backgroundColor: "var(--bg)", padding: "40px 24px", position: "relative", zIndex: 1 }}>
+      <FallingHearts />
       <div style={{ maxWidth: "640px", margin: "0 auto" }}>
 
         {/* Header — logo image */}

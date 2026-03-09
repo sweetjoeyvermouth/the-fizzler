@@ -3,14 +3,14 @@
 :root {
   --bg: #0d0826;
   --card: #0f0730;
-  --card-border: rgba(138, 60, 255, 0.2);
+  --card-border: rgba(180, 120, 255, 0.35);
   --neon-green: #57ff2e;
   --neon-purple: #c44dff;
   --neon-cyan: #00e5ff;
   --text: #e8d8ff;
-  --muted: #5a4080;
+  --muted: #9575c9;
   --input-bg: #07031a;
-  --input-border: #1e1048;
+  --input-border: #3a2472;
   --font-pixel: var(--font-pixel, monospace);
   --font-vt: var(--font-vt, monospace);
 }
@@ -234,4 +234,22 @@ input[type="range"]::-moz-range-thumb {
   border: none;
   border-top: 1px solid var(--input-border);
   margin: 8px 0 24px;
+}
+
+/* Falling hearts */
+@keyframes heartFall {
+  0% {
+    transform: translateY(0) rotate(var(--heart-rot, 0deg));
+    opacity: 0;
+  }
+  8% {
+    opacity: 0.75;
+  }
+  92% {
+    opacity: 0.75;
+  }
+  100% {
+    transform: translateY(calc(100vh + 100px)) rotate(var(--heart-rot, 0deg));
+    opacity: 0;
+  }
 }
