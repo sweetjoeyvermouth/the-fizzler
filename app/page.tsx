@@ -103,16 +103,16 @@ function SliderInput({
 }) {
   return (
     <div className="mb-6">
-      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", marginBottom: "8px" }}>
-        <span className="pixel-label" style={{ marginBottom: 0 }}>{label}</span>
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: "8px", gap: "8px" }}>
+        <span className="pixel-label" style={{ marginBottom: 0, flex: 1 }}>{label}</span>
         {displayValue && (
-          <span style={{ fontFamily: "var(--font-pixel, monospace)", fontSize: "9px", color: "var(--neon-green)" }}>
+          <span style={{ fontFamily: "var(--font-pixel, monospace)", fontSize: "9px", color: "var(--neon-green)", flexShrink: 0, paddingTop: "1px" }}>
             {displayValue}
           </span>
         )}
       </div>
-      <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
-        <span style={{ fontSize: "17px", color: "var(--muted)", width: "90px", textAlign: "right", flexShrink: 0, fontFamily: "var(--font-vt, monospace)" }}>
+      <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+        <span style={{ fontSize: "15px", color: "var(--muted)", width: "60px", textAlign: "right", flexShrink: 0, fontFamily: "var(--font-vt, monospace)", lineHeight: "1.2" }}>
           {leftLabel}
         </span>
         <input
@@ -121,9 +121,9 @@ function SliderInput({
           max={max}
           value={value}
           onChange={(e) => onChange(Number(e.target.value))}
-          style={{ flex: 1 }}
+          style={{ flex: 1, minWidth: 0 }}
         />
-        <span style={{ fontSize: "17px", color: "var(--muted)", width: "90px", flexShrink: 0, fontFamily: "var(--font-vt, monospace)" }}>
+        <span style={{ fontSize: "15px", color: "var(--muted)", width: "60px", flexShrink: 0, fontFamily: "var(--font-vt, monospace)", lineHeight: "1.2" }}>
           {rightLabel}
         </span>
       </div>
