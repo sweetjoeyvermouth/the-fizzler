@@ -31,6 +31,15 @@ const INTIMACY_LABELS = [
   "Home run",
 ];
 
+function PixelLabel({ children, optional }: { children: React.ReactNode; optional?: boolean }) {
+  return (
+    <span className="pixel-label">
+      {children}
+      {optional && <span className="optional">optional</span>}
+    </span>
+  );
+}
+
 function SliderInput({
   label,
   leftLabel,
@@ -52,23 +61,29 @@ function SliderInput({
 }) {
   return (
     <div className="mb-6">
-      <div className="flex justify-between items-baseline mb-1">
-        <label className="font-bold text-gray-700">{label}</label>
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", marginBottom: "8px" }}>
+        <span className="pixel-label" style={{ marginBottom: 0 }}>{label}</span>
         {displayValue && (
-          <span className="text-sm font-semibold text-pink-500">{displayValue}</span>
+          <span style={{ fontFamily: "var(--font-pixel, monospace)", fontSize: "9px", color: "var(--neon-green)" }}>
+            {displayValue}
+          </span>
         )}
       </div>
-      <div className="flex items-center gap-3">
-        <span className="text-xs text-gray-400 w-24 text-right shrink-0">{leftLabel}</span>
+      <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
+        <span style={{ fontSize: "13px", color: "var(--muted)", width: "90px", textAlign: "right", flexShrink: 0, fontFamily: "var(--font-vt, monospace)" }}>
+          {leftLabel}
+        </span>
         <input
           type="range"
           min={min}
           max={max}
           value={value}
           onChange={(e) => onChange(Number(e.target.value))}
-          className="flex-1 accent-pink-500"
+          style={{ flex: 1 }}
         />
-        <span className="text-xs text-gray-400 w-24 shrink-0">{rightLabel}</span>
+        <span style={{ fontSize: "13px", color: "var(--muted)", width: "90px", flexShrink: 0, fontFamily: "var(--font-vt, monospace)" }}>
+          {rightLabel}
+        </span>
       </div>
     </div>
   );
@@ -153,7 +168,7 @@ export default function Home() {
     grammarLevel <= 3 ? "text speak" :
     grammarLevel <= 6 ? "casual" :
     grammarLevel <= 8 ? "proper" :
-    "perfect grammar";
+    "perfect";
 
   const lengthLabel =
     length <= 2 ? "very short" :
@@ -163,41 +178,56 @@ export default function Home() {
     "very long";
 
   return (
-    <main className="min-h-screen bg-yellow-50 p-6 md:p-12">
-      <div className="max-w-2xl mx-auto">
-        {/* Header */}
-        <div className="text-center mb-10">
-          <h1 className="text-5xl font-black text-pink-600 tracking-tight">
-            The Fizzler
-          </h1>
-          <p className="text-gray-500 mt-2 text-lg italic">
-            Let them down easy.
-          </p>
+    <main style={{ minHeight: "100vh", backgroundColor: "var(--bg)", padding: "40px 24px", position: "relative", zIndex: 1 }}>
+      <div style={{ maxWidth: "640px", margin: "0 auto" }}>
+
+        {/* Header — logo image */}
+        <div style={{ textAlign: "center", marginBottom: "40px" }}>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/logo.png"
+            alt="The Fizzler — Let them down easy"
+            style={{ maxWidth: "380px", width: "100%", margin: "0 auto", display: "block" }}
+          />
         </div>
 
-        {/* Controls */}
-        <div className="bg-white rounded-3xl shadow-md p-8 mb-6">
+        {/* Controls card */}
+        <div className="fizzle-card" style={{ padding: "32px", marginBottom: "20px" }}>
+
+          {/* Got a text from them */}
+          <div style={{ marginBottom: "28px" }}>
+            <PixelLabel optional>Got a text from them?</PixelLabel>
+            <p style={{ fontSize: "15px", color: "var(--muted)", marginBottom: "10px", fontFamily: "var(--font-vt, monospace)" }}>
+              Paste their last message — we&apos;ll write a reply that lets them down naturally.
+            </p>
+            <textarea
+              className="dark-input"
+              placeholder="Paste their last text here..."
+              value={theirMessage}
+              onChange={(e) => setTheirMessage(e.target.value)}
+              rows={3}
+            />
+          </div>
+
+          <hr className="section-divider" />
 
           {/* Name */}
-          <div className="mb-6">
-            <label className="block font-bold text-gray-700 mb-1">
-              Their name{" "}
-              <span className="font-normal text-gray-400 text-sm">(optional)</span>
-            </label>
+          <div style={{ marginBottom: "24px" }}>
+            <PixelLabel optional>Their name</PixelLabel>
             <input
+              className="dark-input"
               type="text"
               placeholder="e.g. Alex"
               value={name}
               onChange={(e) => setName(e.target.value)}
-              className="w-full border-2 border-gray-200 rounded-xl p-3 text-gray-700 focus:outline-none focus:border-pink-400"
             />
           </div>
 
           {/* Number of dates */}
-          <div className="mb-6">
-            <div className="flex justify-between items-baseline mb-1">
-              <label className="font-bold text-gray-700">How many dates?</label>
-              <span className="text-sm font-semibold text-pink-500">
+          <div style={{ marginBottom: "24px" }}>
+            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", marginBottom: "8px" }}>
+              <span className="pixel-label" style={{ marginBottom: 0 }}>How many dates?</span>
+              <span style={{ fontFamily: "var(--font-pixel, monospace)", fontSize: "9px", color: "var(--neon-green)" }}>
                 {numDates === 10 ? "10+" : numDates}
               </span>
             </div>
@@ -207,19 +237,17 @@ export default function Home() {
               max={10}
               value={numDates}
               onChange={(e) => setNumDates(Number(e.target.value))}
-              className="w-full accent-pink-500"
+              style={{ width: "100%" }}
             />
           </div>
 
           {/* How you met */}
-          <div className="mb-6">
-            <label className="block font-bold text-gray-700 mb-1">
-              How did you meet?
-            </label>
+          <div style={{ marginBottom: "24px" }}>
+            <PixelLabel>How did you meet?</PixelLabel>
             <select
+              className="dark-input"
               value={howMet}
               onChange={(e) => setHowMet(e.target.value)}
-              className="w-full border-2 border-gray-200 rounded-xl p-3 text-gray-700 focus:outline-none focus:border-pink-400"
             >
               {HOW_MET_OPTIONS.map((opt) => (
                 <option key={opt} value={opt}>
@@ -230,15 +258,12 @@ export default function Home() {
           </div>
 
           {/* Their vibe */}
-          <div className="mb-6">
-            <label className="block font-bold text-gray-700 mb-1">
-              What&apos;s their vibe?{" "}
-              <span className="font-normal text-gray-400 text-sm">(optional)</span>
-            </label>
+          <div style={{ marginBottom: "24px" }}>
+            <PixelLabel optional>What&apos;s their vibe?</PixelLabel>
             <select
+              className="dark-input"
               value={theirVibe}
               onChange={(e) => setTheirVibe(e.target.value)}
-              className="w-full border-2 border-gray-200 rounded-xl p-3 text-gray-700 focus:outline-none focus:border-pink-400"
             >
               <option value="">Not sure / doesn&apos;t matter</option>
               <option value="really-into-me">Really into me</option>
@@ -249,16 +274,13 @@ export default function Home() {
             </select>
           </div>
 
-          {/* Time since last contact */}
-          <div className="mb-6">
-            <label className="block font-bold text-gray-700 mb-1">
-              When did you last talk?{" "}
-              <span className="font-normal text-gray-400 text-sm">(optional)</span>
-            </label>
+          {/* Time since contact */}
+          <div style={{ marginBottom: "28px" }}>
+            <PixelLabel optional>When did you last talk?</PixelLabel>
             <select
+              className="dark-input"
               value={timeSinceContact}
               onChange={(e) => setTimeSinceContact(e.target.value)}
-              className="w-full border-2 border-gray-200 rounded-xl p-3 text-gray-700 focus:outline-none focus:border-pink-400"
             >
               <option value="">Not sure</option>
               <option value="today">Today</option>
@@ -269,23 +291,9 @@ export default function Home() {
             </select>
           </div>
 
-          {/* Their last message */}
-          <div className="mb-6">
-            <label className="block font-bold text-gray-700 mb-1">
-              Got a text from them?{" "}
-              <span className="font-normal text-gray-400 text-sm">(optional)</span>
-            </label>
-            <p className="text-sm text-gray-400 mb-2">Paste their last message and we&apos;ll write a reply that lets them down naturally.</p>
-            <textarea
-              placeholder="Paste their last text here..."
-              value={theirMessage}
-              onChange={(e) => setTheirMessage(e.target.value)}
-              rows={3}
-              className="w-full border-2 border-gray-200 rounded-xl p-3 text-gray-700 focus:outline-none focus:border-pink-400 resize-none"
-            />
-          </div>
+          <hr className="section-divider" />
 
-          {/* Intimacy */}
+          {/* Sliders */}
           <SliderInput
             label="How far did things go?"
             leftLabel="Just vibing"
@@ -297,53 +305,49 @@ export default function Home() {
             displayValue={INTIMACY_LABELS[intimacy - 1]}
           />
 
-          {/* Weight */}
           <SliderInput
             label="How heavy should this feel?"
-            leftLabel="casual, no big deal"
-            rightLabel="serious, heartfelt"
+            leftLabel="casual"
+            rightLabel="heartfelt"
             value={sincerity}
             onChange={setSincerity}
           />
 
-          {/* Door open */}
           <SliderInput
             label="Keep the door open?"
-            leftLabel="Door is SHUT"
-            rightLabel="Maybe someday..."
+            leftLabel="door is SHUT"
+            rightLabel="maybe someday"
             value={doorOpen}
             onChange={setDoorOpen}
           />
 
-          {/* Message length */}
           <SliderInput
             label="Message length"
-            leftLabel="Very short"
-            rightLabel="Very long"
+            leftLabel="short"
+            rightLabel="long"
             value={length}
             onChange={setLength}
             displayValue={lengthLabel}
           />
 
-          {/* Grammar level */}
           <SliderInput
             label="Grammar level"
             leftLabel="text speak"
-            rightLabel="perfect grammar"
+            rightLabel="proper"
             value={grammarLevel}
             onChange={setGrammarLevel}
             displayValue={grammarLabel}
           />
 
+          <hr className="section-divider" />
+
           {/* Excuse theme */}
-          <div className="mb-2">
-            <label className="block font-bold text-gray-700 mb-1">
-              Excuse theme
-            </label>
+          <div>
+            <PixelLabel>Excuse theme</PixelLabel>
             <select
+              className="dark-input"
               value={excuseOption}
               onChange={(e) => setExcuseOption(e.target.value)}
-              className="w-full border-2 border-gray-200 rounded-xl p-3 text-gray-700 focus:outline-none focus:border-pink-400"
             >
               {EXCUSE_OPTIONS.map((opt) => (
                 <option key={opt.value} value={opt.value}>
@@ -357,7 +361,8 @@ export default function Home() {
                 placeholder="Type your excuse..."
                 value={customExcuse}
                 onChange={(e) => setCustomExcuse(e.target.value)}
-                className="w-full mt-2 border-2 border-gray-200 rounded-xl p-3 text-gray-700 focus:outline-none focus:border-pink-400"
+                className="dark-input"
+                style={{ marginTop: "10px" }}
                 autoFocus
               />
             )}
@@ -368,39 +373,41 @@ export default function Home() {
         <button
           onClick={generate}
           disabled={loading}
-          className="w-full py-4 bg-pink-500 hover:bg-pink-600 disabled:bg-pink-300 text-white font-black text-xl rounded-2xl transition-colors shadow-md mb-6"
+          className="fizzle-btn"
+          style={{ marginBottom: "20px" }}
         >
-          {loading ? "Fizzling..." : output ? "Regenerate" : "Fizzle 'Em"}
+          {loading ? "FIZZLING..." : output ? "REGENERATE" : "FIZZLE 'EM"}
         </button>
 
         {/* Output */}
-        <div className="bg-white rounded-3xl shadow-md p-8 min-h-32">
+        <div className="fizzle-card" style={{ padding: "32px", minHeight: "120px" }}>
           {loading && (
-            <div className="flex items-center gap-2 text-gray-400">
-              <div className="w-4 h-4 rounded-full border-2 border-pink-300 border-t-pink-500 animate-spin" />
-              <span className="text-sm">Fizzling...</span>
+            <div style={{ display: "flex", alignItems: "center", gap: "10px", color: "var(--muted)" }}>
+              <div className="spinner" />
+              <span style={{ fontFamily: "var(--font-vt, monospace)", fontSize: "18px" }}>Fizzling...</span>
             </div>
           )}
           {error && !loading && (
-            <p className="text-red-500 font-semibold">{error}</p>
+            <p style={{ color: "#ff4d6a", fontFamily: "var(--font-pixel, monospace)", fontSize: "9px" }}>{error}</p>
           )}
           {output && !loading && (
             <>
-              <p className="text-gray-800 text-lg leading-relaxed whitespace-pre-wrap">
-                {output}
-              </p>
+              <p className="output-text">{output}</p>
               <button
                 onClick={copyToClipboard}
-                className="mt-6 w-full py-3 border-2 border-pink-300 text-pink-600 font-bold rounded-xl hover:bg-pink-50 transition-colors"
+                className={`copy-btn${copied ? " copied" : ""}`}
               >
-                {copied ? "Copied!" : "Copy to Clipboard"}
+                {copied ? "COPIED!" : "COPY TO CLIPBOARD"}
               </button>
             </>
           )}
           {!output && !loading && !error && (
-            <p className="text-gray-300 text-sm">Hit the button to generate your message...</p>
+            <p style={{ color: "var(--muted)", fontFamily: "var(--font-pixel, monospace)", fontSize: "9px", lineHeight: "1.8" }}>
+              Hit the button to<br />generate your message...
+            </p>
           )}
         </div>
+
       </div>
     </main>
   );

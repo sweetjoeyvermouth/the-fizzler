@@ -1,1 +1,237 @@
 @import "tailwindcss";
+
+:root {
+  --bg: #0d0826;
+  --card: #0f0730;
+  --card-border: rgba(138, 60, 255, 0.2);
+  --neon-green: #57ff2e;
+  --neon-purple: #c44dff;
+  --neon-cyan: #00e5ff;
+  --text: #e8d8ff;
+  --muted: #5a4080;
+  --input-bg: #07031a;
+  --input-border: #1e1048;
+  --font-pixel: var(--font-pixel, monospace);
+  --font-vt: var(--font-vt, monospace);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--text);
+  font-family: var(--font-vt), monospace;
+}
+
+/* Pixel scanline overlay on the page */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0, 0, 0, 0.03) 2px,
+    rgba(0, 0, 0, 0.03) 4px
+  );
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Inputs */
+.dark-input {
+  background-color: var(--input-bg);
+  border: 2px solid var(--input-border);
+  color: var(--text);
+  font-family: var(--font-vt), monospace;
+  font-size: 18px;
+  border-radius: 12px;
+  padding: 12px;
+  width: 100%;
+  outline: none;
+  transition: border-color 0.15s;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.dark-input:focus {
+  border-color: var(--neon-purple);
+  box-shadow: 0 0 0 3px rgba(196, 77, 255, 0.15);
+}
+
+.dark-input::placeholder {
+  color: var(--muted);
+  opacity: 1;
+}
+
+select.dark-input {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%235a4080' stroke-width='2' fill='none' stroke-linecap='square'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  padding-right: 40px;
+  cursor: pointer;
+}
+
+select.dark-input option {
+  background-color: #0f0730;
+  color: var(--text);
+}
+
+textarea.dark-input {
+  resize: none;
+}
+
+/* Custom range slider */
+input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 6px;
+  border-radius: 3px;
+  background: var(--input-border);
+  outline: none;
+  cursor: pointer;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 0;
+  background: var(--neon-purple);
+  cursor: pointer;
+  box-shadow: 0 0 8px rgba(196, 77, 255, 0.7);
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+}
+
+input[type="range"]::-moz-range-thumb {
+  width: 18px;
+  height: 18px;
+  border-radius: 0;
+  background: var(--neon-purple);
+  cursor: pointer;
+  border: none;
+  box-shadow: 0 0 8px rgba(196, 77, 255, 0.7);
+}
+
+/* Pixel label */
+.pixel-label {
+  font-family: var(--font-pixel), monospace;
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--neon-green);
+  display: block;
+  margin-bottom: 8px;
+}
+
+.pixel-label .optional {
+  color: var(--muted);
+  text-transform: lowercase;
+  margin-left: 8px;
+}
+
+/* Neon glow on card hover */
+.fizzle-card {
+  background-color: var(--card);
+  border: 1px solid var(--card-border);
+  border-radius: 24px;
+  box-shadow: 0 0 40px rgba(120, 0, 255, 0.08), inset 0 1px 0 rgba(255,255,255,0.03);
+}
+
+/* Generate button */
+.fizzle-btn {
+  background-color: var(--neon-green);
+  color: #0a0520;
+  font-family: var(--font-pixel), monospace;
+  font-size: 13px;
+  font-weight: 900;
+  width: 100%;
+  padding: 20px;
+  border-radius: 16px;
+  border: none;
+  cursor: pointer;
+  letter-spacing: 0.05em;
+  box-shadow: 0 0 20px rgba(87, 255, 46, 0.4), 0 4px 0 #2a8f1a;
+  transition: all 0.1s;
+  position: relative;
+  top: 0;
+}
+
+.fizzle-btn:hover:not(:disabled) {
+  box-shadow: 0 0 35px rgba(87, 255, 46, 0.6), 0 4px 0 #2a8f1a;
+  top: -1px;
+}
+
+.fizzle-btn:active:not(:disabled) {
+  top: 3px;
+  box-shadow: 0 0 15px rgba(87, 255, 46, 0.4), 0 1px 0 #2a8f1a;
+}
+
+.fizzle-btn:disabled {
+  background-color: #2a8f1a;
+  color: #0a0520;
+  opacity: 0.7;
+  cursor: not-allowed;
+  box-shadow: none;
+  top: 3px;
+}
+
+/* Copy button */
+.copy-btn {
+  width: 100%;
+  padding: 12px;
+  margin-top: 20px;
+  border-radius: 12px;
+  border: 2px solid var(--neon-purple);
+  background: transparent;
+  color: var(--neon-purple);
+  font-family: var(--font-pixel), monospace;
+  font-size: 9px;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.copy-btn:hover {
+  background: rgba(196, 77, 255, 0.12);
+  box-shadow: 0 0 15px rgba(196, 77, 255, 0.3);
+}
+
+.copy-btn.copied {
+  border-color: var(--neon-green);
+  color: var(--neon-green);
+  box-shadow: 0 0 15px rgba(87, 255, 46, 0.3);
+}
+
+/* Spinner */
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+.spinner {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  border: 2px solid var(--input-border);
+  border-top-color: var(--neon-green);
+  animation: spin 0.8s linear infinite;
+}
+
+/* Neon glow text in output */
+.output-text {
+  color: var(--text);
+  font-family: var(--font-vt), monospace;
+  font-size: 22px;
+  line-height: 1.6;
+  white-space: pre-wrap;
+}
+
+/* Section divider */
+.section-divider {
+  border: none;
+  border-top: 1px solid var(--input-border);
+  margin: 8px 0 24px;
+}
