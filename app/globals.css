@@ -103,7 +103,7 @@ input[type="range"]::-webkit-slider-thumb {
   height: 18px;
   border-radius: 0;
   background: var(--neon-purple);
-  cursor: pointer;
+  cursor: url('/cursor.png') 0 0, auto !important;
   box-shadow: 0 0 8px rgba(196, 77, 255, 0.7);
   clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
 }
@@ -113,7 +113,7 @@ input[type="range"]::-moz-range-thumb {
   height: 18px;
   border-radius: 0;
   background: var(--neon-purple);
-  cursor: pointer;
+  cursor: url('/cursor.png') 0 0, auto !important;
   border: none;
   box-shadow: 0 0 8px rgba(196, 77, 255, 0.7);
 }
