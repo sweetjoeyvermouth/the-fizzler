@@ -17,6 +17,9 @@ const vt323 = VT323({
 export const metadata: Metadata = {
   title: "The Fizzler",
   description: "Let them down easy.",
+  icons: {
+    icon: "/favicon.png",
+  },
 };
 
 export default function RootLayout({
