@@ -106,13 +106,13 @@ function SliderInput({
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: "8px", gap: "8px" }}>
         <span className="pixel-label" style={{ marginBottom: 0, flex: 1 }}>{label}</span>
         {displayValue && (
-          <span style={{ fontFamily: "'Arial Black', Arial, sans-serif", fontSize: "9px", color: "var(--neon-green)", flexShrink: 0, paddingTop: "1px" }}>
+          <span style={{ fontFamily: "Arial, sans-serif", fontSize: "9px", color: "var(--neon-green)", flexShrink: 0, paddingTop: "1px" }}>
             {displayValue}
           </span>
         )}
       </div>
       <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
-        <span style={{ fontSize: "15px", color: "var(--muted)", width: "60px", textAlign: "right", flexShrink: 0, fontFamily: "'Arial Black', Arial, sans-serif", lineHeight: "1.2" }}>
+        <span style={{ fontSize: "15px", color: "var(--muted)", width: "60px", textAlign: "right", flexShrink: 0, fontFamily: "Arial, sans-serif", lineHeight: "1.2" }}>
           {leftLabel}
         </span>
         <input
@@ -123,7 +123,7 @@ function SliderInput({
           onChange={(e) => onChange(Number(e.target.value))}
           style={{ flex: 1, minWidth: 0 }}
         />
-        <span style={{ fontSize: "15px", color: "var(--muted)", width: "60px", flexShrink: 0, fontFamily: "'Arial Black', Arial, sans-serif", lineHeight: "1.2" }}>
+        <span style={{ fontSize: "15px", color: "var(--muted)", width: "60px", flexShrink: 0, fontFamily: "Arial, sans-serif", lineHeight: "1.2" }}>
           {rightLabel}
         </span>
       </div>
@@ -240,7 +240,7 @@ export default function Home() {
           {/* Got a text from them */}
           <div style={{ marginBottom: "28px" }}>
             <PixelLabel optional>Got a text from them?</PixelLabel>
-            <p style={{ fontSize: "18px", color: "var(--muted)", marginBottom: "10px", fontFamily: "'Arial Black', Arial, sans-serif", lineHeight: "1.3" }}>
+            <p style={{ fontSize: "18px", color: "var(--muted)", marginBottom: "10px", fontFamily: "Arial, sans-serif", lineHeight: "1.3" }}>
               Paste their last message — we&apos;ll write a reply that lets them down naturally.
             </p>
             <textarea
@@ -270,7 +270,7 @@ export default function Home() {
           <div style={{ marginBottom: "24px" }}>
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", marginBottom: "8px" }}>
               <span className="pixel-label" style={{ marginBottom: 0 }}>How many dates?</span>
-              <span style={{ fontFamily: "'Arial Black', Arial, sans-serif", fontSize: "9px", color: "var(--neon-green)" }}>
+              <span style={{ fontFamily: "Arial, sans-serif", fontSize: "9px", color: "var(--neon-green)" }}>
                 {numDates === 10 ? "10+" : numDates}
               </span>
             </div>
@@ -427,11 +427,11 @@ export default function Home() {
           {loading && (
             <div style={{ display: "flex", alignItems: "center", gap: "10px", color: "var(--muted)" }}>
               <div className="spinner" />
-              <span style={{ fontFamily: "'Arial Black', Arial, sans-serif", fontSize: "18px" }}>Fizzling...</span>
+              <span style={{ fontFamily: "Arial, sans-serif", fontSize: "18px" }}>Fizzling...</span>
             </div>
           )}
           {error && !loading && (
-            <p style={{ color: "#ff4d6a", fontFamily: "'Arial Black', Arial, sans-serif", fontSize: "9px" }}>{error}</p>
+            <p style={{ color: "#ff4d6a", fontFamily: "Arial, sans-serif", fontSize: "9px" }}>{error}</p>
           )}
           {output && !loading && (
             <>
@@ -445,7 +445,7 @@ export default function Home() {
             </>
           )}
           {!output && !loading && !error && (
-            <p style={{ color: "var(--muted)", fontFamily: "'Arial Black', Arial, sans-serif", fontSize: "9px", lineHeight: "1.8" }}>
+            <p style={{ color: "var(--muted)", fontFamily: "Arial, sans-serif", fontSize: "9px", lineHeight: "1.8" }}>
               Hit the button to<br />generate your message...
             </p>
           )}

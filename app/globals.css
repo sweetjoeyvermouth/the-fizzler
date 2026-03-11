@@ -11,8 +11,8 @@
   --muted: #b085c8;
   --input-bg: #07031a;
   --input-border: #3d1f52;
-  --font-pixel: 'Arial Black', 'Arial Bold', Arial, sans-serif;
-  --font-vt: 'Arial Black', 'Arial Bold', Arial, sans-serif;
+  --font-pixel: Arial, sans-serif;
+  --font-vt: Arial, sans-serif;
 }
 
 * {
@@ -23,8 +23,7 @@
 body {
   background-color: var(--bg);
   color: var(--text);
-  font-family: 'Arial Black', 'Arial Bold', Arial, sans-serif;
-  font-weight: 900;
+  font-family: Arial, sans-serif;
 }
 
 /* Pixel scanline overlay on the page */
@@ -48,7 +47,7 @@ body::before {
   background-color: var(--input-bg);
   border: 2px solid var(--input-border);
   color: var(--text);
-  font-family: 'Arial Black', 'Arial Bold', Arial, sans-serif;
+  font-family: Arial, sans-serif;
   font-size: 15px;
   border-radius: 12px;
   padding: 12px;
@@ -121,7 +120,7 @@ input[type="range"]::-moz-range-thumb {
 
 /* Pixel label */
 .pixel-label {
-  font-family: 'Arial Black', 'Arial Bold', Arial, sans-serif;
+  font-family: Arial, sans-serif;
   font-size: 11px;
   text-transform: uppercase;
   letter-spacing: 0.06em;
@@ -148,7 +147,7 @@ input[type="range"]::-moz-range-thumb {
 .fizzle-btn {
   background: linear-gradient(135deg, #d4245c 0%, #8b2fa5 100%);
   color: #fff;
-  font-family: 'Arial Black', 'Arial Bold', Arial, sans-serif;
+  font-family: Arial, sans-serif;
   font-size: 15px;
   font-weight: 900;
   width: 100%;
@@ -190,7 +189,7 @@ input[type="range"]::-moz-range-thumb {
   border: 2px solid var(--neon-purple);
   background: transparent;
   color: var(--neon-purple);
-  font-family: 'Arial Black', 'Arial Bold', Arial, sans-serif;
+  font-family: Arial, sans-serif;
   font-size: 11px;
   letter-spacing: 0.05em;
   cursor: pointer;
