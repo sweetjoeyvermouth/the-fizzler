@@ -220,7 +220,7 @@ export default function Home() {
     "very long";
 
   return (
-    <main style={{ minHeight: "100vh", background: "linear-gradient(180deg, #000000 0%, #000000 18%, #120430 36%, #26085a 58%, #3d0e7a 80%, #4a1088 100%)", padding: "40px 24px", position: "relative", zIndex: 1 }}>
+    <main style={{ minHeight: "100vh", background: "linear-gradient(180deg, #4a1088 0%, #3d0e7a 20%, #26085a 42%, #120430 64%, #000000 82%, #000000 100%)", padding: "40px 24px", position: "relative", zIndex: 1 }}>
       <FallingHearts />
       <div style={{ maxWidth: "640px", margin: "0 auto" }}>
 
