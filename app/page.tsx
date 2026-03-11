@@ -230,7 +230,7 @@ export default function Home() {
           <img
             src="/logo.png"
             alt="The Fizzler — Let them down easy"
-            style={{ maxWidth: "380px", width: "100%", margin: "0 auto", display: "block" }}
+            style={{ maxWidth: "520px", width: "100%", margin: "0 auto", display: "block" }}
           />
         </div>
 
