@@ -24,6 +24,7 @@ body {
   background-color: var(--bg);
   color: var(--text);
   font-family: 'Arial Black', 'Arial Bold', Arial, sans-serif;
+  font-weight: 900;
 }
 
 /* Pixel scanline overlay on the page */
