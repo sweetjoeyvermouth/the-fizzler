@@ -145,7 +145,7 @@ input[type="range"]::-moz-range-thumb {
 
 /* Generate button */
 .fizzle-btn {
-  background: linear-gradient(135deg, #e030a0 0%, #7020b0 100%);
+  background: linear-gradient(135deg, #7020b0 0%, #4a0a90 100%);
   color: #fff;
   font-family: Arial, sans-serif;
   font-size: 15px;
@@ -156,20 +156,20 @@ input[type="range"]::-moz-range-thumb {
   border: none;
   cursor: pointer;
   letter-spacing: 0.05em;
-  box-shadow: 0 0 22px rgba(224, 48, 160, 0.45), 0 4px 0 #5a0a80;
+  box-shadow: 0 0 22px rgba(112, 32, 176, 0.55), 0 4px 0 #2a0660;
   transition: all 0.1s;
   position: relative;
   top: 0;
 }
 
 .fizzle-btn:hover:not(:disabled) {
-  box-shadow: 0 0 38px rgba(224, 48, 160, 0.65), 0 4px 0 #5a0a80;
+  box-shadow: 0 0 38px rgba(112, 32, 176, 0.75), 0 4px 0 #2a0660;
   top: -1px;
 }
 
 .fizzle-btn:active:not(:disabled) {
   top: 3px;
-  box-shadow: 0 0 14px rgba(224, 48, 160, 0.4), 0 1px 0 #5a0a80;
+  box-shadow: 0 0 14px rgba(112, 32, 176, 0.4), 0 1px 0 #2a0660;
 }
 
 .fizzle-btn:disabled {
