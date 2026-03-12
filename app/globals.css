@@ -148,14 +148,14 @@ input[type="range"]::-moz-range-thumb {
   background: linear-gradient(135deg, #7020b0 0%, #4a0a90 100%);
   color: #fff;
   font-family: Arial, sans-serif;
-  font-size: 15px;
+  font-size: 36px;
   font-weight: 900;
   width: 100%;
-  padding: 20px;
+  padding: 18px 20px;
   border-radius: 16px;
   border: none;
   cursor: pointer;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.08em;
   box-shadow: 0 0 22px rgba(112, 32, 176, 0.55), 0 4px 0 #2a0660;
   transition: all 0.1s;
   position: relative;
