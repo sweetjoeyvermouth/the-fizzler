@@ -1,16 +1,16 @@
 @import "tailwindcss";
 
 :root {
-  --bg: #0d0826;
-  --card: #0f0730;
-  --card-border: rgba(190, 50, 130, 0.35);
-  --neon-green: #e8407a;
-  --neon-purple: #9b35b5;
-  --neon-cyan: #c090d8;
-  --text: #f0dff5;
-  --muted: #b085c8;
-  --input-bg: #07031a;
-  --input-border: #3d1f52;
+  --bg: #4a1088;
+  --card: #2a0845;
+  --card-border: rgba(232, 64, 176, 0.35);
+  --neon-green: #ff40c0;
+  --neon-purple: #c035d0;
+  --neon-cyan: #e090d8;
+  --text: #fce8f8;
+  --muted: #cc80b8;
+  --input-bg: #160330;
+  --input-border: #5a1850;
   --font-pixel: Arial, sans-serif;
   --font-vt: Arial, sans-serif;
 }
@@ -69,7 +69,7 @@ body::before {
 }
 
 select.dark-input {
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%235a4080' stroke-width='2' fill='none' stroke-linecap='square'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23cc80b8' stroke-width='2' fill='none' stroke-linecap='square'/%3E%3C/svg%3E");
   background-repeat: no-repeat;
   background-position: right 14px center;
   padding-right: 40px;
@@ -77,7 +77,7 @@ select.dark-input {
 }
 
 select.dark-input option {
-  background-color: #0f0730;
+  background-color: #2a0845;
   color: var(--text);
 }
 
@@ -145,7 +145,7 @@ input[type="range"]::-moz-range-thumb {
 
 /* Generate button */
 .fizzle-btn {
-  background: linear-gradient(135deg, #d4245c 0%, #8b2fa5 100%);
+  background: linear-gradient(135deg, #e030a0 0%, #7020b0 100%);
   color: #fff;
   font-family: Arial, sans-serif;
   font-size: 15px;
@@ -156,24 +156,24 @@ input[type="range"]::-moz-range-thumb {
   border: none;
   cursor: pointer;
   letter-spacing: 0.05em;
-  box-shadow: 0 0 22px rgba(212, 36, 92, 0.45), 0 4px 0 #7a1440;
+  box-shadow: 0 0 22px rgba(224, 48, 160, 0.45), 0 4px 0 #5a0a80;
   transition: all 0.1s;
   position: relative;
   top: 0;
 }
 
 .fizzle-btn:hover:not(:disabled) {
-  box-shadow: 0 0 38px rgba(212, 36, 92, 0.65), 0 4px 0 #7a1440;
+  box-shadow: 0 0 38px rgba(224, 48, 160, 0.65), 0 4px 0 #5a0a80;
   top: -1px;
 }
 
 .fizzle-btn:active:not(:disabled) {
   top: 3px;
-  box-shadow: 0 0 14px rgba(212, 36, 92, 0.4), 0 1px 0 #7a1440;
+  box-shadow: 0 0 14px rgba(224, 48, 160, 0.4), 0 1px 0 #5a0a80;
 }
 
 .fizzle-btn:disabled {
-  background: linear-gradient(135deg, #6b1a30 0%, #4a1f5a 100%);
+  background: linear-gradient(135deg, #5a1060 0%, #3a0868 100%);
   color: rgba(255,255,255,0.5);
   cursor: not-allowed;
   box-shadow: none;
@@ -202,9 +202,9 @@ input[type="range"]::-moz-range-thumb {
 }
 
 .copy-btn.copied {
-  border-color: #d4245c;
-  color: #d4245c;
-  box-shadow: 0 0 15px rgba(212, 36, 92, 0.35);
+  border-color: #ff40c0;
+  color: #ff40c0;
+  box-shadow: 0 0 15px rgba(255, 64, 192, 0.35);
 }
 
 /* Spinner */
@@ -216,7 +216,7 @@ input[type="range"]::-moz-range-thumb {
   height: 16px;
   border-radius: 50%;
   border: 2px solid var(--input-border);
-  border-top-color: #d4245c;
+  border-top-color: #ff40c0;
   animation: spin 0.8s linear infinite;
 }
 
